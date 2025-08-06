@@ -1,4 +1,9 @@
-import React, { createContext, useReducer } from "react";
+import {
+  createContext,
+  useReducer,
+  type Dispatch,
+  type ReactNode,
+} from "react";
 
 interface Todo {
   id: number;
@@ -6,14 +11,23 @@ interface Todo {
   done: boolean;
 }
 
-export const TodoContext = createContext({
-  todos: [] as Todo[],
-  dispatch: (action: any) => {},
+type Action =
+  | { type: "ADD_TODO"; payload: string }
+  | { type: "TOGGLE_TODO"; payload: number };
+
+interface TodoContextType {
+  todos: Todo[];
+  dispatch: Dispatch<Action>;
+}
+
+export const TodoContext = createContext<TodoContextType>({
+  todos: [],
+  dispatch: () => {},
 });
 
-const initialState: any = [];
+const initialState: Todo[] = [];
 
-function todoReducer(state: Todo[], action: any): Todo[] {
+function todoReducer(state: Todo[], action: Action): Todo[] {
   switch (action.type) {
     case "ADD_TODO":
       return [...state, { id: Date.now(), text: action.payload, done: false }];
@@ -26,7 +40,7 @@ function todoReducer(state: Todo[], action: any): Todo[] {
   }
 }
 
-export function TodoProvider({ children }: { children: React.ReactNode }) {
+export function TodoProvider({ children }: { children: ReactNode }) {
   const [todos, dispatch] = useReducer(todoReducer, initialState);
 
   return (

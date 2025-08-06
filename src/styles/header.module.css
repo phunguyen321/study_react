@@ -1,0 +1,15 @@
+.header {
+  width: 100%;
+  background: #1976d2;
+  color: #fff;
+  padding: 16px 24px;
+  font-size: 20px;
+  font-weight: bold;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+}
+
+.custom {
+  background-color: rgb(207, 207, 127);
+  color: black;
+}

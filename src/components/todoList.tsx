@@ -1,6 +1,7 @@
 // src/TodoList.js
-import React, { useContext, useMemo } from "react";
-import { TodoContext } from "./TodoContext";
+import { useContext, useMemo } from "react";
+import { TodoContext } from "./todoContext";
+import { Link } from "react-router-dom";
 
 function TodoList() {
   const { todos, dispatch } = useContext(TodoContext);
@@ -30,6 +31,9 @@ function TodoList() {
       <p>
         ✅ Đã hoàn thành: {completedCount} / {todos.length}
       </p>
+      <div>
+        <Link to="/todo/detail">detail todo</Link>
+      </div>
     </div>
   );
 }
